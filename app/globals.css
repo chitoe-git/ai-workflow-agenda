@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 225 31% 7%;
+  --foreground: 220 23% 94%;
+  --card: 224 24% 10%;
+  --card-foreground: 220 20% 94%;
+  --primary: 212 90% 61%;
+  --primary-foreground: 222 47% 11%;
+  --muted: 224 19% 16%;
+  --muted-foreground: 219 13% 65%;
+  --border: 223 16% 22%;
+  --ring: 212 90% 61%;
+  --success: 150 49% 51%;
+  --surface: 224 24% 10%;
+  --panel: 224 18% 13%;
+  --line: 223 16% 22%;
+  --ink: 220 23% 94%;
+  --ink-subtle: 219 13% 65%;
+  --accent-cyan: 195 100% 62%;
+  --accent-violet: 268 92% 67%;
+  --accent-pink: 326 100% 67%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: "Soehne", "Avenir Next", "SF Pro Text", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  background-color: #000;
+  background-image: none;
+  position: relative;
+}
+
+.noise-overlay {
+  position: relative;
+  z-index: 1;
+}
+
+.text-ink {
+  color: hsl(var(--ink));
+}
+
+.text-ink-subtle {
+  color: hsl(var(--ink-subtle));
+}
+
+.bg-surface {
+  background-color: hsl(var(--surface) / 0.78);
+}
+
+.bg-panel {
+  background-color: hsl(var(--panel) / 0.84);
+}
+
+.border-line {
+  border-color: hsl(var(--line));
+}
+
+.shadow-soft {
+  box-shadow:
+    0 3px 18px rgba(2, 6, 18, 0.35),
+    0 28px 62px rgba(2, 6, 18, 0.5);
+}
+
+.tech-card {
+  background-image:
+    linear-gradient(140deg, rgba(48, 61, 106, 0.34), rgba(19, 24, 43, 0.74)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(115, 134, 194, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 40px rgba(2, 6, 18, 0.42);
+}
+
+.tech-divider {
+  border-color: rgba(124, 145, 212, 0.26);
+}
+
+.text-glow {
+  text-shadow: 0 0 24px rgba(94, 164, 255, 0.32);
+}
+
+@keyframes stream-slide {
+  0% {
+    transform: translateX(-14%);
+  }
+  100% {
+    transform: translateX(14%);
+  }
+}
+
+@keyframes stream-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.screen-stream {
+  position: fixed;
+  top: 0;
+  left: -12%;
+  width: 124%;
+  height: 210px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.screen-stream::before {
+  content: "";
+  position: absolute;
+  top: 70px;
+  left: -20%;
+  width: 142%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(46, 129, 255, 0.18) 12%,
+    rgba(46, 129, 255, 0.94) 36%,
+    rgba(147, 97, 255, 0.95) 54%,
+    rgba(255, 82, 188, 0.9) 70%,
+    rgba(255, 82, 188, 0.24) 84%,
+    transparent 100%
+  );
+  animation: stream-slide 13s linear infinite, stream-glow 5s ease-in-out infinite;
+}
+
+.screen-stream::after {
+  content: "";
+  position: absolute;
+  top: 56px;
+  left: -12%;
+  width: 132%;
+  height: 30px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(46, 129, 255, 0.24) 35%,
+    rgba(147, 97, 255, 0.36) 52%,
+    rgba(255, 82, 188, 0.34) 70%,
+    transparent 100%
+  );
+  filter: blur(12px);
+  animation: stream-slide 13s linear infinite reverse, stream-glow 6s ease-in-out infinite;
+}
